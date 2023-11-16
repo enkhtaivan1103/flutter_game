@@ -195,9 +195,10 @@ class _GamePageState extends State<GamePage>
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('lib/assets/backgroundCity.gif'),
-              fit: BoxFit.cover)),
+        image: DecorationImage(
+            image: AssetImage('lib/assets/backgroundCity.gif'),
+            fit: BoxFit.cover),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: GestureDetector(

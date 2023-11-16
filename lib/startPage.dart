@@ -24,18 +24,20 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Scaffold(
-        // backgroundColor: Color.fromARGB(255, 57, 212, 194),
         body: Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height * 1,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 26, 31, 36),
-            // image: DecorationImage(
-            //   fit: BoxFit.fitWidth,
-            //   image: Image.asset(
-            //     'lib/assets/backgroundCity.gif',
-            //   ).image,
-            // ),
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 0, 0, 0),
+                Color.fromARGB(255, 2, 255, 244),
+                Color.fromARGB(255, 206, 3, 95),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomCenter,
+            ),
           ),
           child: Center(
             child: Column(
@@ -69,30 +71,6 @@ class MainPage extends StatelessWidget {
                         fullscreenDialog: true,
                       ),
                     );
-                  },
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 206, 3, 95),
-                    // shadowColor: Colors.red,
-                    elevation: 7,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0)),
-                    minimumSize: const Size(240, 68),
-                  ),
-                  child: Text(
-                    'Make a Sound',
-                    style: GoogleFonts.righteous(
-                      textStyle: const TextStyle(
-                        color: Colors.white,
-                        letterSpacing: .5,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                  onPressed: () async {
-                    final player = AudioPlayer();
-                    await player.play(AssetSource('audio/empty_click.wav'));
                   },
                 ),
               ],
