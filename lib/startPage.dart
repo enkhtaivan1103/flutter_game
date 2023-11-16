@@ -1,14 +1,11 @@
-<<<<<<< HEAD
 import './games/ColorTap.dart';
 import './games/TapGame.dart';
 import './games/kittyCatcher.dart';
 import './games/PlusGame.dart';
 import './games/MinusGame.dart';
-=======
 import 'package:google_fonts/google_fonts.dart';
->>>>>>> 0c193c2381f127c83219146f4587f74f6cafe2f5
 import 'package:flutter/material.dart';
-import 'package:tapgame/games/PlusGame.dart';
+import './games/PlusGame.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -55,7 +52,7 @@ class MainPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: ((context) => const PlusMatchGame()),
+                      builder: ((context) => const KittyCatcher()),
                       fullscreenDialog: true,
                     ),
                   );
