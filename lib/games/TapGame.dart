@@ -186,8 +186,8 @@ class _GamePageState extends State<GamePage>
                   child: Image.asset(imageList[_randomIndex],
                       width: _width, height: _height)),
               Positioned(
-                top: 50.0,
-                right: 20.0,
+                top: 88.0,
+                left: 20.0,
                 child: Text(
                   'Score: $_score',
                   style: GoogleFonts.righteous(
@@ -200,21 +200,30 @@ class _GamePageState extends State<GamePage>
                 ),
               ),
               Positioned(
-                top: 70.0,
-                right: 20.0,
-                child: Text(
-                  'Heart: $_heart',
-                  style: GoogleFonts.righteous(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      letterSpacing: .5,
-                      fontSize: 20,
+                top: 112.0,
+                left: 20.0,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.favorite,
+                      color: Color.fromARGB(255, 206, 3, 95),
+                      size: 20.0,
                     ),
-                  ),
+                    Text(
+                      ': $_heart',
+                      style: GoogleFonts.righteous(
+                        textStyle: const TextStyle(
+                          color: Colors.white,
+                          letterSpacing: .5,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Positioned(
-                top: 70.0,
+                top: 64.0,
                 left: 20.0,
                 child: Text(
                   'Speed: $_fallSpeedCounter',
