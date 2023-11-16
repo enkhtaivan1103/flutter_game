@@ -144,7 +144,7 @@ class _GamePageState extends State<GamePage>
           ),
           actionsAlignment: MainAxisAlignment.center,
           actions: <Widget>[
-            FilledButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -155,6 +155,9 @@ class _GamePageState extends State<GamePage>
                 );
               },
               child: const Text('Exit'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, // This is what you need!
+              ),
             ),
             FilledButton(
               onPressed: _restartGame,
