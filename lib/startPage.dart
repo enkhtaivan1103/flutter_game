@@ -1,5 +1,5 @@
-import 'package:calculator/games/ColorTap.dart';
-import 'package:calculator/games/TapGame.dart';
+import './games/ColorTap.dart';
+import './games/TapGame.dart';
 import './games/kittyCatcher.dart';
 import './games/PlusGame.dart';
 import './games/MinusGame.dart';
