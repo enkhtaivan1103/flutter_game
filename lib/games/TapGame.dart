@@ -88,7 +88,7 @@ class _GamePageState extends State<GamePage>
       setState(() {
         Random random = Random();
         _score++;
-        _fallingSpeed += 0.1;
+        _fallingSpeed += 0.2;
         _top = -80;
         _left = _random.nextDouble() * MediaQuery.of(context).size.width;
         // _right = _random.nextDouble() * MediaQuery.of(context).size.width;
@@ -154,14 +154,36 @@ class _GamePageState extends State<GamePage>
                   ),
                 );
               },
-              child: const Text('Exit'),
+              child: const Text(
+                'Exit',
+              ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red, // This is what you need!
+                backgroundColor: Color.fromARGB(255, 57, 210, 192),
+                // shadowColor: Colors.red,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0)),
+                minimumSize: const Size(80, 40),
               ),
             ),
-            FilledButton(
+            ElevatedButton(
               onPressed: _restartGame,
-              child: const Text('Continue'),
+              child: const Text(
+                'Continue',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 206, 3, 95),
+                // shadowColor: Colors.red,
+                elevation: 7,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0)),
+                minimumSize: const Size(120, 40),
+              ),
             ),
           ],
         );
