@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  audioplayers: ^5.2.1
   flutter:
     sdk: flutter
 
@@ -61,6 +62,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+  #insert Image files
     - lib/assets/cat_1.jpg
     - lib/assets/cat_2.jpg
     - lib/assets/cat_3.jpg
@@ -71,6 +73,10 @@ flutter:
     - lib/assets/cat_8.jpg
     - lib/assets/cat_9.jpg
     - lib/assets/backgroundCity.gif
+
+  #insert Audio files
+    - assets/audio/empty_click.wav
+    - assets/audio/target_click.wav
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and/#resolution-aware

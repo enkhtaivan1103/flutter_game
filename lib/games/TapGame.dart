@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 import '/startPage.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(const TapGame());
 
@@ -31,6 +32,7 @@ class _GamePageState extends State<GamePage>
   late Animation<double> _animation;
   double _top = 0.0;
   double _left = 0.0;
+  double _right = 0.0;
   double _fallingSpeed = 1.0;
   String _fallSpeedCounter = '0.0';
   int _score = 0;
@@ -38,8 +40,10 @@ class _GamePageState extends State<GamePage>
   final Random _random = Random();
   int _randomIndex = 0;
 
-  final double _width = 80;
-  final double _height = 80;
+  double _width = 80;
+  double _height = 80;
+
+  final _player = AudioPlayer();
 
   @override
   void initState() {
@@ -58,6 +62,7 @@ class _GamePageState extends State<GamePage>
           if (_top > MediaQuery.of(context).size.height) {
             _top = -80;
             _left = _random.nextDouble() * MediaQuery.of(context).size.width;
+            // _right = _random.nextDouble() * MediaQuery.of(context).size.width;
             _heart -= 1;
           }
           if (_heart == 0) {
@@ -86,9 +91,11 @@ class _GamePageState extends State<GamePage>
         _fallingSpeed += 0.1;
         _top = -80;
         _left = _random.nextDouble() * MediaQuery.of(context).size.width;
+        // _right = _random.nextDouble() * MediaQuery.of(context).size.width;
         _randomIndex = random.nextInt(imageList.length);
       });
       _animation;
+      _player.play(AssetSource('audio/target_click.wav'));
     }
   }
 
@@ -164,7 +171,7 @@ class _GamePageState extends State<GamePage>
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('lib/assets/images/backgroundCity.gif'),
+              image: AssetImage('lib/assets/backgroundCity.gif'),
               fit: BoxFit.cover)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -229,13 +236,13 @@ class _GamePageState extends State<GamePage>
 }
 
 List<String> imageList = [
-  'lib/assets/images/cat_1.jpg',
-  'lib/assets/images/cat_2.jpg',
-  'lib/assets/images/cat_3.jpg',
-  'lib/assets/images/cat_4.jpg',
-  'lib/assets/images/cat_5.jpg',
-  'lib/assets/images/cat_6.jpg',
-  'lib/assets/images/cat_7.jpg',
-  'lib/assets/images/cat_8.jpg',
-  'lib/assets/images/cat_9.jpg',
+  'lib/assets/cat_1.jpg',
+  'lib/assets/cat_2.jpg',
+  'lib/assets/cat_3.jpg',
+  'lib/assets/cat_4.jpg',
+  'lib/assets/cat_5.jpg',
+  'lib/assets/cat_6.jpg',
+  'lib/assets/cat_7.jpg',
+  'lib/assets/cat_8.jpg',
+  'lib/assets/cat_9.jpg',
 ];
