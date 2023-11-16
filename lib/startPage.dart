@@ -1,9 +1,6 @@
-import 'package:calculator/games/ColorTap.dart';
-import 'package:calculator/games/TapGame.dart';
-import './games/kittyCatcher.dart';
-import './games/PlusGame.dart';
-import './games/MinusGame.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:tapgame/games/PlusGame.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -19,64 +16,48 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('MainPage'),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            ElevatedButton(
-              child: const Text('Kitty Catcher'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => const KittyCatcher())),
-                );
-              },
-            ),
-            ElevatedButton(
-              child: const Text('Color Tap'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: ((context) => const ColorTap())),
-                );
-              },
-            ),
-            ElevatedButton(
-              child: const Text('Tap Game'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: ((context) => const TapGame())),
-                );
-              },
-            ),
-            ElevatedButton(
-              child: const Text('Plus Game'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => const PlusMatchGame())),
-                );
-              },
-            ),
-            ElevatedButton(
-              child: const Text('Minus Game'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => const MinusMatchGame())),
-                );
-              },
-            ),
-          ],
+    return WillPopScope(
+      child: Scaffold(
+        backgroundColor: Colors.lightBlue,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.purple,
+                  shadowColor: Colors.red,
+                  elevation: 7,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40.0)),
+                  minimumSize: const Size(280, 68),
+                ),
+                child: Text(
+                  'Start Game',
+                  style: GoogleFonts.righteous(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      letterSpacing: .5,
+                      fontSize: 34,
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) => const PlusMatchGame()),
+                      fullscreenDialog: true,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
+      onWillPop: () async => false,
     );
   }
 }
