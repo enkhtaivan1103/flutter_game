@@ -95,7 +95,8 @@ class _GamePageState extends State<GamePage>
         _score++;
         _fallingSpeed += 0.2;
         _top = -80;
-        _left = _random.nextDouble() * MediaQuery.of(context).size.width;
+        _left =
+            (_random.nextDouble() - 0.1) * MediaQuery.of(context).size.width;
         // _right = _random.nextDouble() * MediaQuery.of(context).size.width;
         _randomIndex = random.nextInt(imageList.length);
         _calculatedScore = _score * _fallingSpeed.round();
