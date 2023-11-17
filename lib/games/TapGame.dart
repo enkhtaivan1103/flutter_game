@@ -32,7 +32,7 @@ class _GamePageState extends State<GamePage>
   late Animation<double> _animation;
   double _top = 0.0;
   double _left = 0.0;
-  double _right = 0.0;
+  final double _right = 0.0;
   double _fallingSpeed = 1.0;
   String _fallSpeedCounter = '0.0';
   int _score = 0;
@@ -40,8 +40,8 @@ class _GamePageState extends State<GamePage>
   final Random _random = Random();
   int _randomIndex = 0;
 
-  double _width = 80;
-  double _height = 80;
+  final double _width = 80;
+  final double _height = 80;
 
   final _player = AudioPlayer();
 
@@ -154,20 +154,28 @@ class _GamePageState extends State<GamePage>
                   ),
                 );
               },
-              child: const Text(
-                'Exit',
-              ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 57, 210, 192),
+                backgroundColor: const Color.fromARGB(255, 57, 210, 192),
                 // shadowColor: Colors.red,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0)),
                 minimumSize: const Size(80, 40),
               ),
+              child: const Text(
+                'Exit',
+              ),
             ),
             ElevatedButton(
               onPressed: _restartGame,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 206, 3, 95),
+                // shadowColor: Colors.red,
+                elevation: 7,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0)),
+                minimumSize: const Size(120, 40),
+              ),
               child: const Text(
                 'Continue',
                 style: TextStyle(
@@ -175,14 +183,6 @@ class _GamePageState extends State<GamePage>
                   fontSize: 16,
                   color: Colors.white,
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 206, 3, 95),
-                // shadowColor: Colors.red,
-                elevation: 7,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0)),
-                minimumSize: const Size(120, 40),
               ),
             ),
           ],
@@ -230,7 +230,7 @@ class _GamePageState extends State<GamePage>
                 left: 20.0,
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.favorite,
                       color: Color.fromARGB(255, 206, 3, 95),
                       size: 20.0,

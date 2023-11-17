@@ -1,12 +1,6 @@
-import './games/ColorTap.dart';
 import './games/TapGame.dart';
-import './games/kittyCatcher.dart';
-import './games/PlusGame.dart';
-import './games/MinusGame.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import './games/PlusGame.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -27,7 +21,7 @@ class MainPage extends StatelessWidget {
         body: Container(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height * 1,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Color.fromARGB(255, 26, 31, 36),
             gradient: LinearGradient(
               colors: [
@@ -46,7 +40,7 @@ class MainPage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 206, 3, 95),
+                    backgroundColor: const Color.fromARGB(255, 206, 3, 95),
                     // shadowColor: Colors.red,
                     elevation: 7,
                     shape: RoundedRectangleBorder(
