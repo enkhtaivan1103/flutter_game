@@ -72,7 +72,9 @@ flutter:
     - lib/assets/cat_7.jpg
     - lib/assets/cat_8.jpg
     - lib/assets/cat_9.jpg
-    - lib/assets/backgroundCity.gif
+    - lib/assets/bg_1.gif
+    - lib/assets/bg_2.gif
+    - lib/assets/bg_3.gif
 
   #insert Audio files
     - assets/audio/empty_click.wav
