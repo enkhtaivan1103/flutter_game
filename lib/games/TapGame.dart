@@ -229,6 +229,11 @@ class _GamePageState extends State<GamePage>
               ),
               child: const Text(
                 'Exit',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
               ),
             ),
             if (_try > 0) const SizedBox(width: 8.0),
