@@ -32,7 +32,7 @@ class _GamePageState extends State<GamePage>
   late Animation<double> _animation;
   double _top = 0.0;
   double _left = 0.0;
-  double _fallingSpeed = 5.0;
+  double _fallingSpeed = 1.0;
   String _fallSpeedCounter = '0.0';
   int _score = 0;
   int _heart = 5;
@@ -93,7 +93,7 @@ class _GamePageState extends State<GamePage>
       setState(() {
         Random random = Random();
         _score++;
-        _fallingSpeed += 0.2;
+        _fallingSpeed += 0.12;
         _top = -80;
         _left =
             (_random.nextDouble() - 0.1) * MediaQuery.of(context).size.width;
@@ -138,13 +138,13 @@ class _GamePageState extends State<GamePage>
 
   void _backgroundImageChanger() {
     setState(() {
-      if (_calculatedScore > 1000) {
+      if (_calculatedScore > 500) {
         _backgroundImg = 'lib/assets/bg_2.gif';
       }
-      if (_calculatedScore > 2000) {
+      if (_calculatedScore > 750) {
         _backgroundImg = 'lib/assets/bg_1.gif';
       }
-      if (_calculatedScore > 3000) {
+      if (_calculatedScore > 1000) {
         _backgroundImg = 'lib/assets/bg_3.gif';
       }
     });
