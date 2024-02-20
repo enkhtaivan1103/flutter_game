@@ -48,10 +48,13 @@ class _GamePageState extends State<GamePage>
   final double _height = 80;
 
   final _player = AudioPlayer();
+  final _bgPlayer = AudioPlayer();
+  bool _bgMusic = true;
 
   @override
   void initState() {
     super.initState();
+    _startBgMusic();
 
     _controller = AnimationController(
       duration: const Duration(milliseconds: 3000),
@@ -77,6 +80,32 @@ class _GamePageState extends State<GamePage>
         });
       });
     _controller.repeat();
+  }
+
+  _startBgMusic() {
+    _bgPlayer.play(
+        AssetSource('audio/hail-126903(Music by nojisuma from Pixabay).mp3'));
+    setState(() {
+      _bgMusic = true;
+    });
+  }
+
+  _pauseBgMusic() {
+    if (_bgMusic = true) {
+      _bgPlayer.pause();
+      setState(() {
+        _bgMusic = false;
+      });
+      print('$_bgMusic PAUSED');
+    }
+  }
+
+  _resumeBgMusic() {
+    _bgPlayer.resume();
+    setState(() {
+      _bgMusic = true;
+    });
+    print('$_bgMusic RESUMED');
   }
 
   @override
@@ -113,6 +142,7 @@ class _GamePageState extends State<GamePage>
       _stopped = true;
       _showPauseDialog();
     });
+    _pauseBgMusic();
   }
 
   void _onTapPlay() {
@@ -121,6 +151,7 @@ class _GamePageState extends State<GamePage>
     setState(() {
       _stopped = false;
     });
+    _resumeBgMusic();
   }
 
   void _restartGame() {
@@ -155,91 +186,207 @@ class _GamePageState extends State<GamePage>
       barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          elevation: 7,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(26.0),
-            ),
-          ),
-          title: Text(
-            'GAME IS OVER!',
-            style: GoogleFonts.righteous(
-              textStyle: const TextStyle(
-                color: Colors.black,
-                letterSpacing: .5,
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
+        return PopScope(
+          canPop: false,
+          onPopInvoked: (bool didPop) async {
+            print('didPop $didPop');
+          },
+          child: AlertDialog(
+            backgroundColor: Color.fromARGB(255, 255, 232, 196),
+            elevation: 7,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(26.0),
               ),
             ),
-          ),
-          content: Row(
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'YOUR SCORE: $_calculatedScore',
-                    style: GoogleFonts.righteous(
-                      textStyle: const TextStyle(
-                        color: Colors.black,
-                        letterSpacing: .5,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  if (_try > 0)
-                    Text(
-                      'You can try $_try more',
-                      style: GoogleFonts.righteous(
-                        textStyle: const TextStyle(
-                          color: Colors.black,
-                          letterSpacing: .5,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ],
-          ),
-          actionsAlignment: MainAxisAlignment.center,
-          actions: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: ((context) => const StartPage()),
-                    fullscreenDialog: true,
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 57, 210, 192),
-                // shadowColor: Colors.red,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0)),
-                minimumSize: const Size(100, 40),
-              ),
-              child: const Text(
-                'Exit',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Colors.white,
+            title: Text(
+              '~ GAME IS OVER ~',
+              style: GoogleFonts.justAnotherHand(
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  letterSpacing: .5,
+                  fontSize: 54,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
-            if (_try > 0) const SizedBox(width: 8.0),
-            if (_try > 0)
+            content: Row(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'YOUR SCORE: $_calculatedScore',
+                      style: GoogleFonts.justAnotherHand(
+                        textStyle: const TextStyle(
+                          color: Color.fromARGB(255, 3, 1, 36),
+                          letterSpacing: 1,
+                          fontSize: 32,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    if (_try > 0)
+                      Text(
+                        'You can try $_try more',
+                        style: GoogleFonts.justAnotherHand(
+                          textStyle: const TextStyle(
+                            color: Color.fromARGB(255, 3, 1, 36),
+                            letterSpacing: 1,
+                            fontSize: 32,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+            actionsAlignment: MainAxisAlignment.center,
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: ((context) => const StartPage()),
+                      // fullscreenDialog: false,
+                    ),
+                  );
+                },
+                child: Text(
+                  '<- Exit',
+                  style: GoogleFonts.justAnotherHand(
+                    textStyle: const TextStyle(
+                      color: Color.fromARGB(255, 206, 3, 95),
+                      letterSpacing: 1,
+                      fontSize: 36,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              if (_try > 0) const SizedBox(width: 8.0),
+              if (_try > 0)
+                ElevatedButton(
+                  onPressed: _restartGame,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 206, 3, 95),
+                    // shadowColor: Colors.red,
+                    elevation: 7,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0)),
+                    minimumSize: const Size(100, 40),
+                  ),
+                  child: Text(
+                    'Continue',
+                    style: GoogleFonts.justAnotherHand(
+                      textStyle: const TextStyle(
+                        color: Colors.white,
+                        letterSpacing: 1,
+                        fontSize: 36,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+              const SizedBox(
+                height: 40,
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showPauseDialog() {
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        return PopScope(
+          canPop: false,
+          onPopInvoked: (bool didPop) async {
+            print('didPop $didPop');
+          },
+          child: AlertDialog(
+            backgroundColor: Color.fromARGB(255, 255, 232, 196),
+            surfaceTintColor: Colors.transparent,
+            elevation: 5,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(26.0),
+              ),
+            ),
+            title: Text(
+              '~ GAME PAUSED ~',
+              style: GoogleFonts.justAnotherHand(
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  letterSpacing: .5,
+                  fontSize: 54,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            content: Row(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Wait... Take a rest! You can do it...',
+                      style: GoogleFonts.justAnotherHand(
+                        textStyle: const TextStyle(
+                          color: Color.fromARGB(255, 3, 1, 36),
+                          letterSpacing: 1,
+                          fontSize: 32,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            actionsAlignment: MainAxisAlignment.center,
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: ((context) => const StartPage()),
+                      // fullscreenDialog: true,
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  // backgroundColor: const Color.fromARGB(255, 57, 210, 192),
+                  // shadowColor: Colors.red,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0)),
+                  minimumSize: const Size(100, 40),
+                ),
+                child: Text(
+                  '<- Exit',
+                  style: GoogleFonts.justAnotherHand(
+                    textStyle: const TextStyle(
+                      color: Color.fromARGB(255, 206, 3, 95),
+                      letterSpacing: 1,
+                      fontSize: 36,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
               ElevatedButton(
-                onPressed: _restartGame,
+                onPressed: _onTapPlay,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 206, 3, 95),
                   // shadowColor: Colors.red,
@@ -248,120 +395,23 @@ class _GamePageState extends State<GamePage>
                       borderRadius: BorderRadius.circular(18.0)),
                   minimumSize: const Size(100, 40),
                 ),
-                child: const Text(
+                child: Text(
                   'Continue',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            const SizedBox(
-              height: 40,
-            )
-          ],
-        );
-      },
-    );
-  }
-
-  void _showPauseDialog() {
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          elevation: 7,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(26.0),
-            ),
-          ),
-          title: Text(
-            'GAME PAUSED!',
-            style: GoogleFonts.righteous(
-              textStyle: const TextStyle(
-                color: Colors.black,
-                letterSpacing: .5,
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          content: Row(
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Wait... Take a rest! You can do it...',
-                    style: GoogleFonts.righteous(
-                      textStyle: const TextStyle(
-                        color: Colors.black,
-                        letterSpacing: .5,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                  style: GoogleFonts.justAnotherHand(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      letterSpacing: 1,
+                      fontSize: 36,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                ],
+                ),
               ),
+              const SizedBox(
+                height: 40,
+              )
             ],
           ),
-          actionsAlignment: MainAxisAlignment.center,
-          actions: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: ((context) => const StartPage()),
-                    fullscreenDialog: true,
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 57, 210, 192),
-                // shadowColor: Colors.red,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0)),
-                minimumSize: const Size(100, 40),
-              ),
-              child: const Text(
-                'Exit',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: _onTapPlay,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 206, 3, 95),
-                // shadowColor: Colors.red,
-                elevation: 7,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0)),
-                minimumSize: const Size(100, 40),
-              ),
-              child: const Text(
-                'Continue',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 40,
-            )
-          ],
         );
       },
     );
@@ -388,21 +438,21 @@ class _GamePageState extends State<GamePage>
                     width: _width, height: _height),
               ),
               Positioned(
-                top: 88.0,
+                top: 96.0,
                 left: 20.0,
                 child: Text(
                   'Score: $_calculatedScore',
-                  style: GoogleFonts.righteous(
+                  style: GoogleFonts.justAnotherHand(
                     textStyle: const TextStyle(
                       color: Colors.white,
-                      letterSpacing: .5,
-                      fontSize: 20,
+                      letterSpacing: 2,
+                      fontSize: 28,
                     ),
                   ),
                 ),
               ),
               Positioned(
-                top: 112.0,
+                top: 124.0,
                 left: 20.0,
                 child: Row(
                   children: [
@@ -413,11 +463,11 @@ class _GamePageState extends State<GamePage>
                     ),
                     Text(
                       ': $_heart',
-                      style: GoogleFonts.righteous(
+                      style: GoogleFonts.justAnotherHand(
                         textStyle: const TextStyle(
                           color: Colors.white,
-                          letterSpacing: .5,
-                          fontSize: 20,
+                          letterSpacing: 2,
+                          fontSize: 28,
                         ),
                       ),
                     ),
@@ -429,11 +479,11 @@ class _GamePageState extends State<GamePage>
                 left: 20.0,
                 child: Text(
                   'Speed: $_fallSpeedCounter',
-                  style: GoogleFonts.righteous(
+                  style: GoogleFonts.justAnotherHand(
                     textStyle: const TextStyle(
                       color: Colors.white,
-                      letterSpacing: .5,
-                      fontSize: 20,
+                      letterSpacing: 2,
+                      fontSize: 28,
                     ),
                   ),
                 ),

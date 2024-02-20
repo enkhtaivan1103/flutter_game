@@ -38,9 +38,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^6.1.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+flutter_launcher_icons:
+  image_path: "assets/icon/icon.png"
+  android: true
+  ios: true
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -75,10 +81,14 @@ flutter:
     - lib/assets/bg_1.gif
     - lib/assets/bg_2.gif
     - lib/assets/bg_3.gif
+    - lib/assets/coffee_cat.png
+    - lib/assets/hand_only.png
 
   #insert Audio files
     - assets/audio/empty_click.wav
     - assets/audio/target_click.wav
+    - assets/audio/startPage_background.mp3
+    - assets/audio/hail-126903(Music by nojisuma from Pixabay).mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and/#resolution-aware
