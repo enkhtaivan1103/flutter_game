@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_game/games/attribution_screen.dart';
 import 'package:flutter_game/games/TapGame.dart';
@@ -24,6 +26,9 @@ class MainPage extends StatefulWidget {
   @override
   State<MainPage> createState() => _MainPageState();
 }
+
+final Random _random = Random();
+late int value;
 
 class _MainPageState extends State<MainPage> {
   void initState() {

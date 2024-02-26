@@ -46,6 +46,7 @@ class _GamePageState extends State<GamePage>
 
   final double _width = 80;
   final double _height = 80;
+  double _randomWidth = 80;
 
   final _player = AudioPlayer();
   final _bgPlayer = AudioPlayer();
@@ -66,6 +67,7 @@ class _GamePageState extends State<GamePage>
         setState(() {
           _top += _fallingSpeed;
           _fallSpeedCounter = _fallingSpeed.toStringAsFixed(1);
+
           if (_top > MediaQuery.of(context).size.height) {
             _top = -80;
             _left = _random.nextDouble() * MediaQuery.of(context).size.width;
@@ -129,6 +131,7 @@ class _GamePageState extends State<GamePage>
         // _right = _random.nextDouble() * MediaQuery.of(context).size.width;
         _randomIndex = random.nextInt(imageList.length);
         _calculatedScore = _score * _fallingSpeed.round();
+        _randomWidth = _random.nextInt(80) + 40;
       });
       _animation;
       _player.play(AssetSource('audio/target_click.wav'));
@@ -435,7 +438,7 @@ class _GamePageState extends State<GamePage>
                 top: _top,
                 left: _left,
                 child: Image.asset(imageList[_randomIndex],
-                    width: _width, height: _height),
+                    width: _randomWidth, height: _height),
               ),
               Positioned(
                 top: 96.0,
@@ -523,13 +526,13 @@ class _GamePageState extends State<GamePage>
 }
 
 List<String> imageList = [
-  'lib/assets/cat_1.jpg',
-  'lib/assets/cat_2.jpg',
-  'lib/assets/cat_3.jpg',
-  'lib/assets/cat_4.jpg',
-  'lib/assets/cat_5.jpg',
-  'lib/assets/cat_6.jpg',
-  'lib/assets/cat_7.jpg',
-  'lib/assets/cat_8.jpg',
-  'lib/assets/cat_9.jpg',
+  'lib/assets/cat_1.png',
+  'lib/assets/cat_2.png',
+  'lib/assets/cat_3.png',
+  'lib/assets/cat_4.png',
+  'lib/assets/cat_5.png',
+  'lib/assets/cat_6.png',
+  'lib/assets/cat_7.png',
+  'lib/assets/cat_8.png',
+  'lib/assets/cat_9.png',
 ];
